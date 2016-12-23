@@ -1,15 +1,15 @@
 package com.ivzar.vomel.modernartapp;
 
-import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Modern_UI";
@@ -20,6 +20,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final View leftUp = findViewById(R.id.leftUp);
+
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seek1);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /**
+             * @param seekBar  The SeekBar whose progress has changed
+             * @param progress The current progress level. This will be in the range 0..max where
+             *                 max was set by setMax(int). (The default value for max is 100.)
+             * @param fromUser True if the progress change was initiated by the user.
+             */
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                Log.i(TAG, "onProgressChanged: "+progress+" ("+fromUser+")");
+                ColorDrawable background = (ColorDrawable) leftUp.getBackground();
+                int color = background.getColor();
+                int newColor = Color.rgb(progress, Color.green(color), Color.blue(color));
+                leftUp.setBackgroundColor(newColor);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
