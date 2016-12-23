@@ -70,6 +70,6 @@
         android:maxHeight="1000dp"
         android:layout_alignParentBottom="true"
         android:max="255"
-        android:progress="20"
+        android:progress="0"
         android:secondaryProgress="20" />
 </RelativeLayout>

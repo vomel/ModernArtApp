@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Modern_UI";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ColorDrawable background = (ColorDrawable) leftUp.getBackground();
-                int color = background.getColor();
-                int newColor = Color.rgb(progress, Color.green(color), Color.blue(color));
-                leftUp.setBackgroundColor(newColor);
+                changeColor(progress, leftUp);
+                changeColor(progress, leftBottom);
+                changeColor(progress, rightUp);
+                changeColor(progress, rightBottom);
             }
+
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -48,9 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                Log.i(TAG, "Progress so far: " + seekBar.getProgress());
             }
         });
+    }
+
+    private static void changeColor(int progress, View view) {
+        ColorDrawable background = (ColorDrawable) view.getBackground();
+        int color = background.getColor();
+        int newColor = Color.rgb(progress, Color.green(color), Color.blue(255 - progress));
+        view.setBackgroundColor(newColor);
     }
 
     @Override
