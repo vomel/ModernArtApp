@@ -1,7 +1,11 @@
 package com.ivzar.vomel.modernartapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +17,8 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Modern_UI";
+    static private final String URL = "http://www.moma.org";
+    static private final String CHOOSER_TEXT = "Load " + URL + " with:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         final View leftUp = findViewById(R.id.leftUp);
         final View leftBottom = findViewById(R.id.leftBottom);
         final View rightUp = findViewById(R.id.rightUp);
@@ -80,6 +87,29 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Inspired by the works of Mondrian")
+                    .setMessage("Click below to learn more")
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setPositiveButton("Visit MoMA", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+//                            Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                            Uri webpage = Uri.parse(URL);
+                            Intent baseIntent = new Intent(Intent.ACTION_VIEW, webpage);
+
+                            // Create a chooser intent, for choosing which Activity
+                            Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
+
+
+                            Log.i(TAG, "Chooser Intent Action:" + chooserIntent.getAction());
+
+
+                            // Start the chooser Activity, using the chooser intent
+                            startActivity(chooserIntent);
+
+                        }
+                    })
+                    .setNegativeButton("Not now", null).show();
             return true;
         }
 
