@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             new AlertDialog.Builder(this)
-                    .setTitle("Inspired by the works of Mondrian")
-                    .setMessage("Click below to learn more")
+                    .setTitle(R.string.info_dialog_title)
+                    .setMessage(R.string.click_for_more)
                     .setIcon(android.R.drawable.ic_dialog_info)
-                    .setPositiveButton("Visit MoMA", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.visit_moma, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
 //                            Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                             Uri webpage = Uri.parse(URL);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     })
-                    .setNegativeButton("Not now", null).show();
+                    .setNegativeButton(R.string.not_now, null).show();
             return true;
         }
 

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ModernArtApp</string>
     <string name="action_settings">Settings</string>
+    <string name="visit_moma">Visit MoMA</string>
+    <string name="info_dialog_title">Inspired by the works of Mondrian</string>
+    <string name="click_for_more">Click below to learn more</string>
+    <string name="not_now">Not now</string>
+    <string name="more_information">More information</string>
 </resources>
