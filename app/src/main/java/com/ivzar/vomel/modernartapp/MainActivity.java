@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final View leftUp = findViewById(R.id.leftUp);
+        final View leftBottom = findViewById(R.id.leftBottom);
+        final View rightUp = findViewById(R.id.rightUp);
+        final View rightBottom = findViewById(R.id.rightBottom);
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seek1);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                Log.i(TAG, "onProgressChanged: "+progress+" ("+fromUser+")");
                 ColorDrawable background = (ColorDrawable) leftUp.getBackground();
                 int color = background.getColor();
                 int newColor = Color.rgb(progress, Color.green(color), Color.blue(color));
