@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Modern_UI";
     static private final String URL = "http://www.moma.org";
     static private final String CHOOSER_TEXT = "Load " + URL + " with:";
+    public static final int B_COL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final View leftUp = findViewById(R.id.leftUp);
-        final View leftBottom = findViewById(R.id.leftBottom);
-        final View rightUp = findViewById(R.id.rightUp);
-        final View rightBottom = findViewById(R.id.rightBottom);
+        final View leftTop = getView(R.id.leftUp);
+        final View leftBottom = getView(R.id.leftBottom);
+        final View rightTop = getView(R.id.rightUp);
+        final View rightBottom = getView(R.id.rightBottom);
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seek1);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -43,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                changeColor(progress, leftUp);
+                changeColor(progress, leftTop);
                 changeColor(progress, leftBottom);
-                changeColor(progress, rightUp);
+                changeColor(progress, rightTop);
                 changeColor(progress, rightBottom);
             }
 
@@ -58,15 +60,38 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Log.i(TAG, "Progress so far: " + seekBar.getProgress());
+                int originalColor = (Integer) leftTop.getTag();
+                int red = Color.red(originalColor);
+                int green = Color.green(originalColor);
+                int blue = Color.blue(originalColor);
+                Log.i(TAG, "RGB: " + red + " " + green + " " + blue);
             }
         });
     }
 
+    @NonNull
+    private View getView(int id) {
+        final View view = findViewById(id);
+        view.setTag(((ColorDrawable) view.getBackground()).getColor());
+        return view;
+    }
+
     private static void changeColor(int progress, View view) {
-        ColorDrawable background = (ColorDrawable) view.getBackground();
-        int color = background.getColor();
-        int newColor = Color.rgb(progress, Color.green(color), Color.blue(255 - progress));
+
+        int originalColor = (Integer) view.getTag();
+        int red = Color.red(originalColor);
+        int green = Color.green(originalColor);
+        int blue = Color.blue(originalColor);
+        int newColor = Color.rgb(
+                getNewColor(progress, red),
+                getNewColor(progress, green),
+                getNewColor(progress, blue)
+        );
         view.setBackgroundColor(newColor);
+    }
+
+    static int getNewColor(int progress, int originalColor) {
+        return originalColor + progress * (255 - originalColor) / 100;
     }
 
     @Override

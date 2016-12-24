@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize"
-        android:background="#000000"
-        android:padding="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="@dimen/border"
         android:baselineAligned="false">
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,17 +20,17 @@
             <TableRow
                 android:id="@+id/leftUp"
                 android:layout_width="match_parent"
-                android:background="#105080"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:background="@color/left_top"
+                android:layout_marginBottom="@dimen/border"
+                android:layout_marginRight="@dimen/border"
                 android:layout_weight="2" />
 
             <TableRow
                 android:id="@+id/leftBottom"
                 android:layout_width="match_parent"
-                android:background="#9F2071"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:background="@color/left_bottom"
+                android:layout_marginBottom="@dimen/border"
+                android:layout_marginRight="@dimen/border"
                 android:layout_weight="2" />
         </TableLayout>
 
@@ -42,22 +42,22 @@
             <TableRow
                 android:id="@+id/rightUp"
                 android:layout_width="match_parent"
-                android:background="#6F1031"
-                android:layout_marginBottom="10dp"
+                android:background="@color/right_top"
+                android:layout_marginBottom="@dimen/border"
                 android:layout_weight="1" />
 
             <TableRow
                 android:id="@+id/grey"
                 android:layout_width="match_parent"
                 android:background="#aaaaaa"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/border"
                 android:layout_weight="1" />
 
             <TableRow
                 android:id="@+id/rightBottom"
                 android:layout_width="match_parent"
-                android:background="#3F10f1"
-                android:layout_marginBottom="10dp"
+                android:background="@color/right_bottom"
+                android:layout_marginBottom="@dimen/border"
                 android:layout_weight="1" />
         </TableLayout>
 
@@ -69,7 +69,7 @@
         android:layout_height="?actionBarSize"
         android:maxHeight="1000dp"
         android:layout_alignParentBottom="true"
-        android:max="255"
+        android:max="100"
         android:progress="0"
         android:secondaryProgress="20" />
 </RelativeLayout>
