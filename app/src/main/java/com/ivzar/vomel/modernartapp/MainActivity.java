@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Modern_UI";
     static private final String URL = "http://www.moma.org";
     static private final String CHOOSER_TEXT = "Load " + URL + " with:";
-    public static final int B_COL = 1;
+    public static final String SEEKBAR_POSITION = "SEEKBAR_POSITION";
+    SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         final View rightTop = getView(R.id.rightUp);
         final View rightBottom = getView(R.id.rightBottom);
 
-        SeekBar seekBar = (SeekBar) findViewById(R.id.seek1);
+        seekBar = (SeekBar) findViewById(R.id.seek_bar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
              * @param seekBar  The SeekBar whose progress has changed
@@ -59,14 +60,23 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.i(TAG, "Progress so far: " + seekBar.getProgress());
+                Log.d(TAG, "Progress so far: " + seekBar.getProgress());
                 int originalColor = (Integer) leftTop.getTag();
                 int red = Color.red(originalColor);
                 int green = Color.green(originalColor);
                 int blue = Color.blue(originalColor);
-                Log.i(TAG, "RGB: " + red + " " + green + " " + blue);
+                Log.d(TAG, "RGB: " + red + " " + green + " " + blue);
             }
         });
+        if (savedInstanceState != null)
+            seekBar.setProgress(savedInstanceState.getInt(SEEKBAR_POSITION));
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(SEEKBAR_POSITION, seekBar.getProgress());
+        super.onSaveInstanceState(outState);
     }
 
     @NonNull
@@ -77,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static void changeColor(int progress, View view) {
-
         int originalColor = (Integer) view.getTag();
         int red = Color.red(originalColor);
         int green = Color.green(originalColor);
@@ -118,20 +127,14 @@ public class MainActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setPositiveButton(R.string.visit_moma, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-//                            Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                             Uri webpage = Uri.parse(URL);
                             Intent baseIntent = new Intent(Intent.ACTION_VIEW, webpage);
 
                             // Create a chooser intent, for choosing which Activity
                             Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
 
-
-                            Log.i(TAG, "Chooser Intent Action:" + chooserIntent.getAction());
-
-
                             // Start the chooser Activity, using the chooser intent
                             startActivity(chooserIntent);
-
                         }
                     })
                     .setNegativeButton(R.string.not_now, null).show();
