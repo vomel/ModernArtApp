@@ -49,7 +49,7 @@
             <TableRow
                 android:id="@+id/grey"
                 android:layout_width="match_parent"
-                android:background="#aaaaaa"
+                android:background="@color/rightMiddle"
                 android:layout_marginBottom="@dimen/border"
                 android:layout_weight="1" />
 

@@ -14,12 +14,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Modern_UI";
-    static private final String URL = "http://www.moma.org";
-    static private final String CHOOSER_TEXT = "Load " + URL + " with:";
+    private String URL;
+    private String CHOOSER_TEXT;
     public static final String SEEKBAR_POSITION = "SEEKBAR_POSITION";
     SeekBar seekBar;
 
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "MainActivity.onCreate");
+        URL = getResources().getString(R.string.moma_url);
+        CHOOSER_TEXT = "Load " + URL + " with:";
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,10 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.info_dialog_title)
-                    .setMessage(R.string.click_for_more)
-                    .setIcon(android.R.drawable.ic_dialog_info)
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setView(this.getLayoutInflater().inflate(R.layout.more_info_view, null))
                     .setPositiveButton(R.string.visit_moma, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             Uri webpage = Uri.parse(URL);
@@ -137,7 +138,21 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(chooserIntent);
                         }
                     })
-                    .setNegativeButton(R.string.not_now, null).show();
+                    .setNegativeButton(R.string.not_now, null).create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialogInterface) {
+                    Button no = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_NEGATIVE);
+                    no.setBackgroundColor(Color.RED);
+                    no.invalidate();
+
+                    Button yes = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
+                    yes.setBackgroundColor(Color.GREEN);
+                    yes.invalidate();
+                }
+            });
+            dialog.show();
+
             return true;
         }
 
