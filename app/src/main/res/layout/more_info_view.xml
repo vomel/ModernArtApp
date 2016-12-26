@@ -21,4 +21,34 @@
         android:textColor="@color/rightMiddle"
         android:text="@string/click_for_more" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/border"
+        android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/visit_now"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/border"
+            android:layout_marginRight="@dimen/border"
+            android:textAlignment="center"
+            android:textColor="@color/rightMiddle"
+            android:text="@string/visit_moma" />
+
+
+        <Button
+            android:id="@+id/next_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/border"
+            android:textAlignment="center"
+            android:textColor="@color/rightMiddle"
+            android:text="@string/not_now" />
+    </LinearLayout>
 </LinearLayout>

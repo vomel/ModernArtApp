@@ -1,7 +1,6 @@
 package com.ivzar.vomel.modernartapp;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private String URL;
     private String CHOOSER_TEXT;
     public static final String SEEKBAR_POSITION = "SEEKBAR_POSITION";
-    SeekBar seekBar;
+    private View moreInfoView;
+    private SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 changeColor(progress, rightTop);
                 changeColor(progress, rightBottom);
             }
-
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -124,31 +124,30 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setView(this.getLayoutInflater().inflate(R.layout.more_info_view, null))
-                    .setPositiveButton(R.string.visit_moma, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            Uri webpage = Uri.parse(URL);
-                            Intent baseIntent = new Intent(Intent.ACTION_VIEW, webpage);
-
-                            // Create a chooser intent, for choosing which Activity
-                            Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
-
-                            // Start the chooser Activity, using the chooser intent
-                            startActivity(chooserIntent);
-                        }
-                    })
-                    .setNegativeButton(R.string.not_now, null).create();
-            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            moreInfoView = this.getLayoutInflater().inflate(R.layout.more_info_view, null);
+            final Dialog dialog = new AppCompatDialog(this);
+            dialog.setContentView(moreInfoView);
+            Button visitNow = (Button) dialog.findViewById(R.id.visit_now);
+            visitNow.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onShow(DialogInterface dialogInterface) {
-                    Button no = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_NEGATIVE);
-                    no.setBackgroundColor(Color.RED);
-                    no.invalidate();
+                public void onClick(View view) {
+                    Log.d(TAG, "Visiting " + URL);
+                    Uri webpage = Uri.parse(URL);
+                    Intent baseIntent = new Intent(Intent.ACTION_VIEW, webpage);
 
-                    Button yes = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
-                    yes.setBackgroundColor(Color.GREEN);
-                    yes.invalidate();
+                    // Create a chooser intent, for choosing which Activity
+                    Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
+
+                    // Start the chooser Activity, using the chooser intent
+                    startActivity(chooserIntent);
+                }
+            });
+            Button notNow = (Button) dialog.findViewById(R.id.next_time);
+            notNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "Not now");
+                    dialog.dismiss();
                 }
             });
             dialog.show();
