@@ -33,25 +33,64 @@ public class MoreInfoNotNowTest extends
         // Wait for activity: 'MainActivity'
         assertTrue("CancelTest failed:" +
                         "Section One:" +
-                        "ToDoManagerActivity did not load correctly.",
-                solo.waitForActivity(
-                        MainActivity.class, 2000));
+                        "MainActivity did not load correctly.",
+                solo.waitForActivity(MainActivity.class, delay));
 
         // Click on action bar item
-        solo.clickOnActionBarItem(0x1);
+//        solo.clickOnActionBarItem(0x1);
 
-        solo.sleep(delay);
+//        solo.sleep(delay);
 
         // Click on Action Bar
         solo.clickOnMenuItem("More information");
 //        solo.clickOnView(solo.getView(R.id.toolbar));
 //        solo.clickOnView(solo.getView(R.id.action_settings));
 
-        // Wait for activity: 'com.ivzar.vomel.modernartapp.action_settings'
+        // Wait for 'More Information' dialog to open
         assertTrue("CancelTest failed:" +
                         "Section One:" +
                         "More Information window did not load correctly.",
-                solo.waitForDialogToOpen(1000L));
+                solo.waitForDialogToOpen());
+
+        // Click on NotNow
+        solo.clickOnView(solo.getView(R.id.next_time));
+
+        // Wait for activity: 'com.ivzar.vomel.modernartapp.MainActivity'
+        assertTrue("Cancel test failed:" + "Section One:"
+                        + "MainActivity did not correctly load.",
+                solo.waitForActivity(
+                        com.ivzar.vomel.modernartapp.MainActivity.class, delay));
+
+        // Click on Action Bar
+        solo.clickOnMenuItem("More information");
+
+        // Wait for 'More Information' dialog to open
+        assertTrue("CancelTest failed:" +
+                        "Section One:" +
+                        "More Information window did not load correctly.",
+                solo.waitForDialogToOpen());
+
+
+        // Click on NotNow
+        solo.clickOnView(solo.getView(R.id.visit_now));
+
+        solo.sleep(delay);
+
+
+        // Wait for activity: 'com.android.internal.app.ChooserActivity'
+        assertTrue(
+                "ImplicitTest:" +
+                        "Section One:" +
+                        "ChooserActivity was not launched correctly",
+                solo.waitForActivity("ChooserActivity", delay));
+
+        assertTrue(
+                "ImplicitTest:" +
+                        "Section One:" +
+                        "Browser was not found",
+                solo.searchText("Browser", true));
+
+
 /*
         // Hide the soft keyboard
         solo.hideSoftKeyboard();
