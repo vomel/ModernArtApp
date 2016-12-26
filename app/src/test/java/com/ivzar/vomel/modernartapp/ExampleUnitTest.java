@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() throws Exception {
+    public void color_change_isCorrect() throws Exception {
         assertEquals(0, getNewColor(0, 0));
         assertEquals(63, getNewColor(25, 0));
         assertEquals(127, getNewColor(50, 0));
@@ -31,9 +31,4 @@ public class ExampleUnitTest {
         assertEquals(255, getNewColor(75, 255));
         assertEquals(255, getNewColor(100, 255));
     }
-
-//    private void print(int progress, int originalColor) {
-//        int newColor = getNewColor(progress, originalColor);
-//        System.out.println(progress + " * " + originalColor + " => " + newColor);
-//    }
 }
