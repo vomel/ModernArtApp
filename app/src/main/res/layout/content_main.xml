@@ -18,7 +18,7 @@
             android:layout_weight="2">
 
             <TableRow
-                android:id="@+id/leftUp"
+                android:id="@+id/leftTop"
                 android:layout_width="match_parent"
                 android:background="@color/left_top"
                 android:layout_marginBottom="@dimen/border"
@@ -40,16 +40,16 @@
             android:layout_weight="3">
 
             <TableRow
-                android:id="@+id/rightUp"
+                android:id="@+id/rightTop"
                 android:layout_width="match_parent"
                 android:background="@color/right_top"
                 android:layout_marginBottom="@dimen/border"
                 android:layout_weight="1" />
 
             <TableRow
-                android:id="@+id/grey"
+                android:id="@+id/rightMiddle"
                 android:layout_width="match_parent"
-                android:background="@color/rightMiddle"
+                android:background="@color/right_middle"
                 android:layout_marginBottom="@dimen/border"
                 android:layout_weight="1" />
 

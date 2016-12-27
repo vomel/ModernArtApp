@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final View leftTop = getView(R.id.leftUp);
+        final View leftTop = getView(R.id.leftTop);
         final View leftBottom = getView(R.id.leftBottom);
-        final View rightTop = getView(R.id.rightUp);
+        final View rightTop = getView(R.id.rightTop);
         final View rightBottom = getView(R.id.rightBottom);
 
         seekBar = (SeekBar) findViewById(R.id.seek_bar);

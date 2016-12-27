@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:textAlignment="center"
-        android:textColor="@color/rightMiddle"
+        android:textColor="@color/right_middle"
         android:text="@string/info_dialog_title" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/border"
         android:textAlignment="center"
-        android:textColor="@color/rightMiddle"
+        android:textColor="@color/right_middle"
         android:text="@string/click_for_more" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,7 +36,7 @@
             android:padding="@dimen/border"
             android:layout_marginRight="@dimen/border"
             android:textAlignment="center"
-            android:textColor="@color/rightMiddle"
+            android:textColor="@color/right_middle"
             android:text="@string/visit_moma" />
 
 
@@ -48,7 +48,7 @@
             android:background="@color/colorPrimary"
             android:padding="@dimen/border"
             android:textAlignment="center"
-            android:textColor="@color/rightMiddle"
+            android:textColor="@color/right_middle"
             android:text="@string/not_now" />
     </LinearLayout>
 </LinearLayout>
