@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class ColorAlgorithmTest {
     @Test
     public void color_change_isCorrect() throws Exception {
         assertEquals(0, getNewColor(0, 0));
